@@ -1,0 +1,74 @@
+{
+  "_schema": {
+    "doc": "Step 4 SuperBox SKUs (BuyLog p.11-64) + wire-bend left/right mount rule.",
+    "sku_fields": {
+      "sku": "ABB ordering code (RNSB...)",
+      "amps": "panel ampacity rating (A)",
+      "main_type": "MLO | MCB | MCB-GF",
+      "enclosure": "NEMA1 | NEMA3R",
+      "gf_on_main": "ground-fault-on-main compatible (bool)",
+      "dims_in": "[H, W, D] inches",
+      "xspace_left": "usable X-space, left (wide) side",
+      "xspace_right": "usable X-space, right side",
+      "xspace_basis": "'net' (all rows): the published left/right ARE the usable capacity. The engine uses them as-is -- MLO main charges 0 (lugs already netted out), MCB main charges only its own breaker frame X-space (Step 4 footnote 1). Informational; the engine no longer subtracts a separate MLO lug pad.",
+      "offset_class": "'40in_offset' | '45in_offset' -- selects the wire_bend rule set below",
+      "rail_orientation": "XT1-rail SKU family. Always 'BF' for the merchandised SuperBox (per the Step 2 SuperBox accessories table, p.11-61). The BR variants are non-SuperBox.",
+      "page": "BuyLog page ref"
+    },
+    "RESOLVED_xspace_basis": "Published L/R are the usable capacity as-is (per user). MLO shows 4X less per side than the identical MCB because the lug pad is already netted out, so the engine charges 0 for an MLO main and only the breaker's own frame X-space for an MCB main.",
+    "RESOLVED_rail_orientation": "SuperBox uses the BF rail family (SR1XBF/SR2XBF/SR5XBF) per the Step 2 SuperBox accessories table (p.11-61). The BR variants on the nomenclature page (11-65/66) are generic Tmax/SB mounting, NOT SuperBox."
+  },
+
+  "skus": [
+    {"sku": "RNSB06L6040A", "amps": 600, "main_type": "MLO", "enclosure": "NEMA1", "gf_on_main": false, "dims_in": [60.3, 40.7, 11], "xspace_left": 12, "xspace_right": 12, "xspace_basis": "net", "offset_class": "40in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB06B6040A", "amps": 600, "main_type": "MCB", "enclosure": "NEMA1", "gf_on_main": false, "dims_in": [60.3, 40.7, 11], "xspace_left": 16, "xspace_right": 16, "xspace_basis": "net", "offset_class": "40in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB06L6040R", "amps": 600, "main_type": "MLO", "enclosure": "NEMA3R", "gf_on_main": false, "dims_in": [61, 43.5, 16.7], "xspace_left": 12, "xspace_right": 12, "xspace_basis": "net", "offset_class": "40in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB06B6040R", "amps": 600, "main_type": "MCB", "enclosure": "NEMA3R", "gf_on_main": false, "dims_in": [61, 43.5, 16.7], "xspace_left": 16, "xspace_right": 16, "xspace_basis": "net", "offset_class": "40in_offset", "rail_orientation": "BF", "page": "11-64"},
+
+    {"sku": "RNSB08L7245A", "amps": 800, "main_type": "MLO", "enclosure": "NEMA1", "gf_on_main": false, "dims_in": [72.3, 45.7, 11], "xspace_left": 20, "xspace_right": 20, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB08B7245A", "amps": 800, "main_type": "MCB", "enclosure": "NEMA1", "gf_on_main": false, "dims_in": [72.3, 45.7, 11], "xspace_left": 24, "xspace_right": 24, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB08L7245R", "amps": 800, "main_type": "MLO", "enclosure": "NEMA3R", "gf_on_main": false, "dims_in": [73, 48.5, 16.7], "xspace_left": 20, "xspace_right": 20, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB08B7245R", "amps": 800, "main_type": "MCB", "enclosure": "NEMA3R", "gf_on_main": false, "dims_in": [73, 48.5, 16.7], "xspace_left": 24, "xspace_right": 24, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+
+    {"sku": "RNSB12L8445A", "amps": 1200, "main_type": "MLO", "enclosure": "NEMA1", "gf_on_main": false, "dims_in": [84.3, 45.7, 11], "xspace_left": 28, "xspace_right": 28, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB12B8445A", "amps": 1200, "main_type": "MCB", "enclosure": "NEMA1", "gf_on_main": false, "dims_in": [84.3, 45.7, 11], "xspace_left": 32, "xspace_right": 32, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB12G9645A", "amps": 1200, "main_type": "MCB-GF", "enclosure": "NEMA1", "gf_on_main": true, "dims_in": [96.3, 45.7, 11], "xspace_left": 28, "xspace_right": 28, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB12L8445R", "amps": 1200, "main_type": "MLO", "enclosure": "NEMA3R", "gf_on_main": false, "dims_in": [85, 48.5, 16.7], "xspace_left": 28, "xspace_right": 28, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB12B8445R", "amps": 1200, "main_type": "MCB", "enclosure": "NEMA3R", "gf_on_main": false, "dims_in": [85, 48.5, 16.7], "xspace_left": 32, "xspace_right": 32, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"},
+    {"sku": "RNSB12G9645R", "amps": 1200, "main_type": "MCB-GF", "enclosure": "NEMA3R", "gf_on_main": true, "dims_in": [97, 48.5, 16.7], "xspace_left": 32, "xspace_right": 32, "xspace_basis": "net", "offset_class": "45in_offset", "rail_orientation": "BF", "page": "11-64"}
+  ],
+
+  "wire_bend": {
+    "doc": "Wire-bend mount-space table (p.11-64), confirmed from clean scan. Each frame's left_in / right_in are the required wire-bend dimensions. A frame is LEFT-ONLY iff right_in is null ('—' in the BuyLog). The engine DERIVES left-only from right_in==null, so this table is the single source of truth. Only XT5/XT6/XT7 are left-only (XT4 has a 5.2\" right value in BOTH enclosures).",
+    "40in_offset": {
+      "applies_to": "600A boxes (40\" wide interior)",
+      "frames": {
+        "XT5":  {"left_in": 10.9,  "right_in": null},
+        "XT4":  {"left_in": 15.2,  "right_in": 5.2},
+        "XT2":  {"left_in": 16.4,  "right_in": 6.4},
+        "XT1":  {"left_in": 15.2,  "right_in": 5.2},
+        "FB1":  {"left_in": 14.5,  "right_in": 4.5},
+        "FB2":  {"left_in": 14.9,  "right_in": 4.9},
+        "TEY1": {"left_in": 14.3,  "right_in": 4.3},
+        "TEY2": {"left_in": 14.3,  "right_in": 4.3},
+        "A2":   {"left_in": 15.58, "right_in": 5.58}
+      }
+    },
+    "45in_offset": {
+      "applies_to": "800A and 1200A boxes (45\" wide interior)",
+      "frames": {
+        "XT7":  {"left_in": 12.2,  "right_in": null},
+        "XT6":  {"left_in": 13.4,  "right_in": null, "note": "with 400 kcmil lug"},
+        "XT5":  {"left_in": 15.9,  "right_in": null},
+        "XT4":  {"left_in": 20.2,  "right_in": 5.2},
+        "XT2":  {"left_in": 21.4,  "right_in": 6.4},
+        "XT1":  {"left_in": 20.2,  "right_in": 5.2},
+        "FB1":  {"left_in": 19.5,  "right_in": 4.5},
+        "FB2":  {"left_in": 19.9,  "right_in": 4.9},
+        "TEY1": {"left_in": 19.3,  "right_in": 4.3},
+        "TEY2": {"left_in": 19.3,  "right_in": 4.3},
+        "A2":   {"left_in": 20.58, "right_in": 5.58}
+      }
+    }
+  }
+}

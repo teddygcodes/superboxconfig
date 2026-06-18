@@ -1,0 +1,8 @@
+# 1200 A MLO NEMA 1 SuperBox, mixed loadout (deterministic single-box fit).
+# XT4 mounts either side (5.2" right wire-bend); 7 XT1 branches group as 5+2.
+panel_amps: 1200
+main_type: MLO
+enclosure: NEMA1
+branches:
+  - {frame: XT4, poles: 3, amps: 250, int_rating: H, trip_unit: TMF, qty: 2}
+  - {frame: XT1, poles: 3, amps: 100, int_rating: N, qty: 7}

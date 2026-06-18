@@ -1,0 +1,14 @@
+# Refuse case: a branch requesting 750 kcmil load lugs is outside the
+# merchandised envelope -> REQUIRES FACTORY-ASSEMBLED neXT.
+panel_amps: 1200
+main_type: MCB
+enclosure: NEMA1
+main:
+  frame: XT7
+  poles: 3
+  amps: 1200
+  int_rating: H
+  trip_unit: Ekip Touch LSI
+  orientation: vertical
+branches:
+  - {frame: XT5, poles: 3, amps: 600, int_rating: H, qty: 1, load_lug: "750 kcmil"}

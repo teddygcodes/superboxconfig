@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReliaGear neXT SuperBox — BOM Generator</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">
+      <span class="abb">ABB</span>
+      <span class="sep">|</span>
+      <span class="app"><b>SuperBox</b> BOM</span>
+    </div>
+    <div class="spacer"></div>
+    <div id="statusChip" class="status-chip">No configuration</div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="panel" class="active">Panel</button>
+    <button data-tab="feeders">Feeders</button>
+    <button data-tab="accessories">Accessories</button>
+    <button data-tab="bom">BOM</button>
+    <button data-tab="drawing">Drawing</button>
+  </nav>
+
+  <main>
+    <!-- ===== PANEL ===== -->
+    <section class="card tabpane" data-pane="panel">
+      <h2>Panel configuration</h2>
+      <div class="grid">
+        <div class="field">
+          <label>Panel ampacity (A)</label>
+          <select id="panelAmps"></select>
+        </div>
+        <div class="field">
+          <label>Main type</label>
+          <select id="mainType"></select>
+        </div>
+        <div class="field">
+          <label>Enclosure</label>
+          <select id="enclosure"></select>
+        </div>
+        <div class="field">
+          <label>Voltage</label>
+          <select id="voltage"></select>
+        </div>
+        <div class="field">
+          <label>System</label>
+          <input type="text" id="system" readonly>
+        </div>
+      </div>
+
+      <div id="mainBreakerBlock" class="hide">
+        <div class="section-title">Main breaker</div>
+        <div class="grid" id="mainBreakerGrid"></div>
+        <div class="grid" style="margin-top:14px">
+          <div class="field">
+            <label>Mounting orientation</label>
+            <div class="radio-row">
+              <label><input type="radio" name="mainOrient" value="horizontal" checked> Horizontal</label>
+              <label><input type="radio" name="mainOrient" value="vertical"> Vertical</label>
+            </div>
+          </div>
+        </div>
+        <div class="section-title">Main accessories</div>
+        <div id="mainAccCell" class="main-acc"><span class="muted">Select a main breaker first.</span></div>
+      </div>
+    </section>
+
+    <!-- ===== FEEDERS ===== -->
+    <section class="card tabpane hide" data-pane="feeders">
+      <h2>Branch feeder circuit breakers</h2>
+      <table class="feeders">
+        <thead>
+          <tr>
+            <th style="width:60px">Qty</th>
+            <th>Amps</th>
+            <th>Frame</th>
+            <th>Poles</th>
+            <th>Int. rating</th>
+            <th>Trip unit</th>
+            <th>Phase</th>
+            <th>Load lug</th>
+            <th>Accessories</th>
+            <th>Part #</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="feederRows"></tbody>
+      </table>
+      <div class="btn-row">
+        <button class="btn" id="addFeeder">+ Add feeder</button>
+      </div>
+    </section>
+
+    <!-- ===== ACCESSORIES (panel-level) ===== -->
+    <section class="card tabpane hide" data-pane="accessories">
+      <h2>Panel accessories</h2>
+
+      <div class="section-title">Surge protective device (SPD) &mdash; 10X</div>
+      <div class="grid">
+        <div class="field"><label class="check"><input type="checkbox" id="spdOn"> Include SPD</label></div>
+        <div class="field"><label>Voltage</label><select id="spdVoltage" disabled></select></div>
+        <div class="field"><label>Impulse current (kA)</label><select id="spdKa" disabled></select></div>
+      </div>
+
+      <div class="section-title">RGM40 meter &mdash; 4X</div>
+      <div class="grid">
+        <div class="field"><label class="check"><input type="checkbox" id="rgmOn"> Include meter</label></div>
+        <div class="field"><label>Function</label><select id="rgmFunction" disabled></select></div>
+        <div class="field"><label>Protocol</label><select id="rgmProtocol" disabled></select></div>
+        <div class="field"><label>Voltage</label><select id="rgmVoltage" disabled></select></div>
+      </div>
+
+      <div class="section-title">RELT (XT7 Ekip Touch) &mdash; 3X</div>
+      <div class="grid">
+        <div class="field"><label class="check"><input type="checkbox" id="reltOn"> Include RELT kit</label></div>
+        <div class="field"><label>Voltage</label><select id="reltVoltage" disabled></select></div>
+      </div>
+
+      <div class="section-title">Blank + filler</div>
+      <div class="grid">
+        <div class="field"><label>Width (X)</label><select id="blankWidth"><option value="">None</option><option>1</option><option>2</option><option>3</option></select></div>
+        <div class="field"><label>Filler</label><select id="blankFiller"><option value="true">With filler</option><option value="false">Blank only</option></select></div>
+        <div class="field"><label>Qty</label><input type="number" id="blankQty" min="1" value="1"></div>
+      </div>
+    </section>
+
+    <!-- ===== BOM ===== -->
+    <section class="card tabpane hide" data-pane="bom">
+      <h2>Bill of materials</h2>
+      <div id="bomOutput"><div class="empty">Configure the panel and feeders, then results appear here.</div></div>
+    </section>
+
+    <!-- ===== DRAWING ===== -->
+    <section class="card tabpane hide" data-pane="drawing">
+      <div class="drawing-head">
+        <h2>Panel drawing</h2>
+        <button class="btn" id="printBtn">Print / Save PDF</button>
+      </div>
+      <div id="drawingOutput"><div class="empty">A valid configuration renders the panel-marks sheet and layout here.</div></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

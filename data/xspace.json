@@ -1,0 +1,45 @@
+{
+  "_schema": {
+    "doc": "X-space accounting (BuyLog Step 3, p.11-63) + accessory X-space (11-61/62 footnotes) + XT1 grouping rule + XT1 mounting-rail SKUs by orientation (11-65/66).",
+    "frame_xspace": "X-spaces consumed by ONE breaker of a given frame, keyed by frame then pole-count (string). null = TODO transcribe / verify.",
+    "main_lug_pad_xspace": "X-spaces per MLO lug-pad set; also added to a vertical main breaker (rule #3).",
+    "xt5_accessory_extra": "extra X-spaces when an XT5 carries electrical accessories (rule #4, 11-62 footnote).",
+    "accessory_xspace": "X-spaces for plug-in accessory modules that occupy bus positions.",
+    "xt1_grouping": "non-linear XT1 X-space: 1->3X, 2->5X, 5->11X; bin_order = greedy fill order to MINIMIZE total X.",
+    "xt1_rails": "rail SKU per group size, by orientation family. SuperBox SKUs name their family in superbox.json (rail_orientation)."
+  },
+
+  "frame_xspace": {
+    "_source": "Step 3 table, p.11-63 (confirmed from clean scan).",
+    "XT2": {"3": 3},
+    "XT4": {"3": 3},
+    "XT5": {"3": 4},
+    "XT6": {"3": 6},
+    "XT7": {"3": 6},
+    "FB":  {"1": 1, "2": 2},
+    "TEY": {"1": 1, "2": 2},
+    "A2":  {"2": 2}
+  },
+
+  "main_lug_pad_xspace": 4,
+  "xt5_accessory_extra": 1,
+
+  "accessory_xspace": {
+    "RELT": 3,
+    "RGM40": 4,
+    "SPD": 10,
+    "_note": "SPD plug-in = 10X and RGM40 meter = 4X per the p.11-62 device-page footnotes (confirmed by user). RELT 3X (p.11-61 fn4 / Step 3 table). NOTE: the Step 3 table (p.11-63) prints SPD = 6X, which is a BuyLog inconsistency; 10X governs."
+  },
+
+  "xt1_grouping": {
+    "groups": {"1": 3, "2": 5, "5": 11},
+    "bin_order": [5, 2, 1],
+    "page": "11-63"
+  },
+
+  "xt1_rails": {
+    "doc": "Mounting rails are NOT included in the SuperBox and must be ordered as their own BOM line. The merchandised SuperBox uses the BF family (SR1XBF/SR2XBF/SR5XBF) per the Step 2 SuperBox accessories table (p.11-61). The BR variants are for non-SuperBox generic Tmax/SB mounting (nomenclature p.11-65/66) and are kept here for reference only.",
+    "BF": {"1": "SR1XBF", "2": "SR2XBF", "5": "SR5XBF"},
+    "BR_reference_only": {"1": "SR1XBR", "2": "SR2XBR", "5": "SR5XBR"}
+  }
+}

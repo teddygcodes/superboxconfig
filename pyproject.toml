@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "abb-superbox-bom"
+version = "0.1.0"
+description = "ABB ReliaGear neXT SuperBox BOM generator (BuyLog Section 11)"
+requires-python = ">=3.9"
+dependencies = ["click>=8.1", "PyYAML>=6.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=7.4"]
+
+[project.scripts]
+superbox-bom = "superbox_bom.cli:main"
+
+[tool.setuptools]
+packages = ["superbox_bom"]
+
+[tool.setuptools.package-data]
+superbox_bom = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

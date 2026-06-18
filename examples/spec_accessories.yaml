@@ -1,0 +1,27 @@
+# 1200 A MCB NEMA 1 with accessories.
+# Demonstrates: vertical main breaker, XT5 shunt trip (+1X rule), XT1 grouping,
+# and panel-level SPD (10X) + RGM40 meter (4X).
+panel_amps: 1200
+main_type: MCB
+enclosure: NEMA1
+main:
+  frame: XT7
+  poles: 3
+  amps: 1200
+  int_rating: H
+  trip_unit: Ekip Touch LSI
+  orientation: vertical
+branches:
+  - frame: XT5
+    poles: 3
+    amps: 400
+    int_rating: H
+    trip_unit: Ekip DIP LSI
+    qty: 1
+    accessories:
+      - {kind: shunt_trip}          # XT5 electrical accessory -> +1X
+  - {frame: XT4, poles: 3, amps: 250, int_rating: H, trip_unit: TMF, qty: 2}
+  - {frame: XT1, poles: 3, amps: 100, int_rating: N, qty: 5}
+accessories:
+  - {kind: spd,   voltage: "480Y/277", ka: 150}
+  - {kind: rgm40, function: standard, protocol: "Modbus RTU", voltage: "480Y/277,208Y/120"}

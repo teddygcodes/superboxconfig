@@ -1,0 +1,123 @@
+{
+  "_schema": {
+    "doc": "Step 2 accessories (BuyLog pp.11-61/62). Two classes: breaker-mounted (aux_contacts, shunt_trip, undervoltage_release, padlock, service_entrance_barrier) and panel-level plug-ins (spd, rgm40, blank, relt). Electrical accessories (aux/shunt/uvr) on an XT5 trigger the +1X rule. Each record carries the applicable frame(s), selection keys, ordering code, and (panel-level) x_space.",
+    "fields": {
+      "frame / frames": "applicable breaker frame(s)",
+      "volts": "coil/aux voltage (AC) where applicable",
+      "code": "ABB ordering code",
+      "x_space": "panel X-spaces consumed (panel-level plug-ins only)",
+      "page": "BuyLog page ref"
+    }
+  },
+
+  "aux_contacts": [
+    {"type": "AUX-C 1 Q + 1 SY", "volts": 250, "frame": "XT1", "code": "KXTAAXCQSYFP",  "page": "11-61"},
+    {"type": "AUX-C 2 Q + 1 SY", "volts": 250, "frame": "XT1", "code": "KXTAAXC2QSYFP", "page": "11-61"},
+    {"type": "AUX-C 1 Q + 1 SY", "volts": 24,  "frame": "XT1", "code": "KXTAAXCDQSYFP", "page": "11-61"},
+    {"type": "AUX-C 3 Q + 1 SY", "volts": 24,  "frame": "XT2", "code": "KXTDAXCD3QSYFP","page": "11-61"},
+    {"type": "AUX 4Q",           "volts": 24,  "frame": "XT7", "code": "ZE1AUX4D",      "page": "11-61"},
+    {"type": "AUX 4Q",           "volts": 400, "frame": "XT7", "code": "ZE1AUX4",       "page": "11-61"},
+    {"type": "AUX 1 SY",         "volts": 24,  "frame": "XT7", "code": "ZE1BAD",        "page": "11-61"},
+    {"type": "AUX 1 SY",         "volts": 250, "frame": "XT7", "code": "ZE1BA",         "page": "11-61"}
+  ],
+
+  "shunt_trip": [
+    {"volts": 24,  "frame": "XT1", "code": "KXTASORCFPB", "page": "11-61"},
+    {"volts": 110, "frame": "XT1", "code": "KXTASORCFPD", "page": "11-61"},
+    {"volts": 220, "frame": "XT1", "code": "KXTASORCFPE", "page": "11-61"},
+    {"volts": null, "frames": ["XT5", "XT6"], "code": "KXTFYOCFPD", "page": "11-61",
+     "note": "BuyLog shows a single merged cell for XT5/XT6 shunt trip (voltage variants not differentiated). Verify per-voltage codes with ABB."},
+    {"volts": 24,  "frame": "XT7", "code": "ZEZSZ", "page": "11-61"},
+    {"volts": 110, "frame": "XT7", "code": "ZEASE", "page": "11-61"},
+    {"volts": 220, "frame": "XT7", "code": "ZEASG", "page": "11-61"}
+  ],
+
+  "undervoltage_release": [
+    {"volts": 24,  "frame": "XT1", "code": "KXTAUVRCFP1", "page": "11-61"},
+    {"volts": 110, "frame": "XT1", "code": "KXTAUVRCFP4", "page": "11-61"},
+    {"volts": 220, "frame": "XT1", "code": "KXTAUVRCFP5", "page": "11-61"},
+    {"volts": 24,  "frames": ["XT5", "XT6"], "code": "KXTFYUC1", "page": "11-61"},
+    {"volts": 110, "frames": ["XT5", "XT6"], "code": "KXTFYUC4", "page": "11-61"},
+    {"volts": 220, "frames": ["XT5", "XT6"], "code": "KXTFYUC5", "page": "11-61"},
+    {"volts": 24,  "frame": "XT7", "code": "ZEAUA", "page": "11-61"},
+    {"volts": 110, "frame": "XT7", "code": "ZEAUE", "page": "11-61"},
+    {"volts": 220, "frame": "XT7", "code": "ZEAUG", "page": "11-61"}
+  ],
+
+  "padlock": [
+    {"style": "fixed_open",        "frame": "XT1", "code": "KXTBPLLOP",   "page": "11-61"},
+    {"style": "fixed_open",        "frame": "XT2", "code": "KXTCPLLOP",   "page": "11-61"},
+    {"style": "fixed_open",        "frame": "XT5", "code": "KXT5PLLOP",   "page": "11-61"},
+    {"style": "fixed_open",        "frame": "XT6", "code": "KXT6PLLOP",   "page": "11-61"},
+    {"style": "fixed_open",        "frame": "XT7", "code": "KXT7PLLOP",   "page": "11-61"},
+    {"style": "fixed_open_closed", "frame": "XT1", "code": "KXTBLLOPL",   "page": "11-61"},
+    {"style": "fixed_open_closed", "frame": "XT2", "code": "KXTCPLLOPCL", "page": "11-61"},
+    {"style": "fixed_open_closed", "frame": "XT5", "code": "KXT5PLLOPLC", "page": "11-61"},
+    {"style": "fixed_open_closed", "frame": "XT6", "code": "KXT6PLLOPLC", "page": "11-61"},
+    {"style": "fixed",             "frame": "TEY", "code": "TEYXPLD1",    "page": "11-61"},
+    {"style": "fixed",             "frame": "FB",  "code": "FB1PF",       "page": "11-61"},
+    {"style": "removable",         "frame": "A2",  "code": "KA2LDOR",     "page": "11-61",
+     "note": "removable padlock attachment; the padlock KA2LD is ordered separately. Padlocks are not included in the kit (BuyLog fn1)."}
+  ],
+
+  "relt": [
+    {"type": "kit",            "volts": "120/240", "frame": "XT7", "x_space": 3, "code": "RT04A", "page": "11-62"},
+    {"type": "kit",            "volts": "480",     "frame": "XT7", "x_space": 3, "code": "RT04B", "page": "11-62"},
+    {"type": "kit",            "volts": "600",     "frame": "XT7", "x_space": 3, "code": "RT04C", "page": "11-62"},
+    {"type": "wire_connector", "frame": "XT7", "code": "CN004", "page": "11-62",
+     "note": "RELT wire connector for XT7 2K-3. Requires XT7 with Ekip Touch (or above) trip unit; firmware >= 3.10.00 (ref 9AKK107991A2520)."}
+  ],
+
+  "service_entrance_barrier": [
+    {"frame": "XT1", "code": "SBX1W02P3", "page": "11-61"},
+    {"frame": "XT2", "variant": "thermo_mag", "code": "SBX2WT2P3", "page": "11-61"},
+    {"frame": "XT2", "variant": "ekip",       "code": "SBX2WE2P3", "page": "11-61"},
+    {"frame": "XT4", "variant": "300kcmil",   "code": "SBX4W30P3", "page": "11-61"},
+    {"frame": "XT4", "variant": "350kcmil",   "code": "SBX4W35P3", "page": "11-61"},
+    {"frame": "XT5", "code": "SBX5W50P3", "page": "11-61"},
+    {"frame": "XT6", "code": "SBX6W40P3", "page": "11-61"},
+    {"frame": "XT7", "code": "SBX7W50P3", "page": "11-61"}
+  ],
+
+  "blank": [
+    {"width": 1, "filler": true,  "x_space": 1, "code": "SR01BF", "page": "11-61"},
+    {"width": 1, "filler": false, "x_space": 1, "code": "SR01BB", "page": "11-61"},
+    {"width": 2, "filler": true,  "x_space": 2, "code": "SR02BF", "page": "11-61"},
+    {"width": 2, "filler": false, "x_space": 2, "code": "SR02BB", "page": "11-61"},
+    {"width": 3, "filler": true,  "x_space": 3, "code": "SR03BF", "page": "11-61"},
+    {"width": 3, "filler": false, "x_space": 3, "code": "SR03BB", "page": "11-61"},
+    {"width": 1, "filler": false, "x_space": 1, "frame": "XT1", "code": "SRT1BB", "page": "11-61", "note": "XT1 blank only"}
+  ],
+
+  "spd": [
+    {"voltage": "480Y/277", "ka": 80,  "x_space": 10, "code": "RGPPSP277Y08T2", "page": "11-62"},
+    {"voltage": "480Y/277", "ka": 150, "x_space": 10, "code": "RGPPSP277Y15T2", "page": "11-62"},
+    {"voltage": "480Y/277", "ka": 225, "x_space": 10, "code": "RGPPSP277Y22T2", "page": "11-62"},
+    {"voltage": "480Y/277", "ka": 300, "x_space": 10, "code": "RGPPSP277Y30T2", "page": "11-62"},
+    {"voltage": "208Y/120", "ka": 80,  "x_space": 10, "code": "RGPPSP120Y08T2", "page": "11-62"},
+    {"voltage": "208Y/120", "ka": 150, "x_space": 10, "code": "RGPPSP120Y15T2", "page": "11-62"},
+    {"voltage": "208Y/120", "ka": 225, "x_space": 10, "code": "RGPPSP120Y22T2", "page": "11-62"},
+    {"voltage": "208Y/120", "ka": 300, "x_space": 10, "code": "RGPPSP120Y30T2", "page": "11-62"}
+  ],
+
+  "rgm40": [
+    {"function": "standard",          "protocol": "Modbus RTU", "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V1MX", "page": "11-62"},
+    {"function": "standard",          "protocol": "Modbus TCP", "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V1TX", "page": "11-62"},
+    {"function": "standard",          "protocol": "BACnet",     "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V1BX", "page": "11-62"},
+    {"function": "standard",          "protocol": "Modbus RTU", "voltage": "480,240", "x_space": 4, "code": "RGM40V1MT", "page": "11-62"},
+    {"function": "standard",          "protocol": "Modbus TCP", "voltage": "480,240", "x_space": 4, "code": "RGM40V1TT", "page": "11-62"},
+    {"function": "standard",          "protocol": "BACnet",     "voltage": "480,240", "x_space": 4, "code": "RGM40V1BT", "page": "11-62"},
+    {"function": "standard+datalog",  "protocol": "Modbus RTU", "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V2MX", "page": "11-62"},
+    {"function": "standard+datalog",  "protocol": "Modbus TCP", "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V2TX", "page": "11-62"},
+    {"function": "standard+datalog",  "protocol": "BACnet",     "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V2BX", "page": "11-62"},
+    {"function": "standard+datalog",  "protocol": "Modbus RTU", "voltage": "480,240", "x_space": 4, "code": "RGM40V2MT", "page": "11-62"},
+    {"function": "standard+datalog",  "protocol": "Modbus TCP", "voltage": "480,240", "x_space": 4, "code": "RGM40V2TT", "page": "11-62"},
+    {"function": "standard+datalog",  "protocol": "BACnet",     "voltage": "480,240", "x_space": 4, "code": "RGM40V2BT", "page": "11-62"},
+    {"function": "advanced",          "protocol": "Modbus RTU", "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V6MX", "page": "11-62"},
+    {"function": "advanced",          "protocol": "Modbus TCP", "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V6TX", "page": "11-62"},
+    {"function": "advanced",          "protocol": "BACnet",     "voltage": "480Y/277,208Y/120", "x_space": 4, "code": "RGM40V6BX", "page": "11-62"},
+    {"function": "advanced",          "protocol": "Modbus RTU", "voltage": "480,240", "x_space": 4, "code": "RGM40V6MT", "page": "11-62"},
+    {"function": "advanced",          "protocol": "Modbus TCP", "voltage": "480,240", "x_space": 4, "code": "RGM40V6TT", "page": "11-62"},
+    {"function": "advanced",          "protocol": "BACnet",     "voltage": "480,240", "x_space": 4, "code": "RGM40V6BT", "page": "11-62"}
+  ]
+}
