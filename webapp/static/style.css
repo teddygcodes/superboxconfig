@@ -36,7 +36,11 @@ header.topbar {
   z-index: 20;
 }
 .logo { display: flex; align-items: center; gap: 12px; }
-.logo .hesco-logo { height: 40px; width: auto; display: block; }
+.logo .hesco { display: inline-flex; flex-direction: column; line-height: 1; }
+.logo .hesco-top { display: inline-flex; align-items: center; gap: 1px; }
+.logo .hesc { font: 800 31px/1 Arial, Helvetica, sans-serif; letter-spacing: -1.5px; color: #0a0a0a; }
+.logo .flag-o { width: 26px; height: 26px; display: block; }
+.logo .hesco-sub { font: 800 19px/1 Arial, Helvetica, sans-serif; letter-spacing: -0.6px; color: #0a0a0a; text-align: center; margin-top: 2px; }
 .logo .sep { color: var(--line); font-size: 26px; font-weight: 200; }
 .logo .app { font-size: 20px; font-weight: 400; color: #222; }
 .logo .app b { font-weight: 700; }
