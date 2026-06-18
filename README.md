@@ -14,6 +14,20 @@ main/accessory X-space accounting, and the "is this even a merchandised box?" ch
 
 ---
 
+## Use it online (no install)
+
+The whole tool runs in your browser — the verified Python engine is executed
+client-side via [Pyodide](https://pyodide.org), so there's nothing to install and
+no server to run:
+
+### 👉 https://teddygcodes.github.io/superboxconfig/
+
+(First load fetches the Python runtime — a few seconds — then it's instant.)
+
+If you'd rather run it locally or hack on it, see below.
+
+---
+
 ## Quick start
 
 Requires **Python 3.9+**.
@@ -126,3 +140,9 @@ ABB.** "ReliaGear", "SuperBox", "Tmax", and the part numbers are ABB's. Always v
 generated BOM against current ABB documentation and your local ABB sales team before
 ordering — the tool is provided **as-is, without warranty**, and the authors are not
 responsible for ordering errors.
+
+## License
+
+The source code is released under the **MIT License** (see [LICENSE](LICENSE)). The
+catalog data under `data/` is transcribed from ABB's BuyLog and remains ABB's
+intellectual property — it is included here for interoperability, not relicensed.

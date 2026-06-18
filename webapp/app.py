@@ -20,8 +20,7 @@ from flask import Flask, jsonify, request, send_from_directory
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from superbox_bom.catalog import Catalog
-from superbox_bom.cli import _result_to_jsonable, _spec_from_dict
-from superbox_bom.engine import assemble_bom
+from superbox_bom.engine import assemble_bom, result_to_jsonable, spec_from_dict
 from superbox_bom.errors import FACTORY_BANNER, SuperBoxError
 
 STATIC = Path(__file__).resolve().parent / "static"
@@ -45,8 +44,8 @@ def api_bom():
     """Take a spec (same shape as the YAML spec) → BOM + validation."""
     data = request.get_json(force=True) or {}
     try:
-        spec = _spec_from_dict(data)
-        result = _result_to_jsonable(assemble_bom(spec, catalog))
+        spec = spec_from_dict(data)
+        result = result_to_jsonable(assemble_bom(spec, catalog))
         return jsonify(result)
     except SuperBoxError as e:
         # e.g. ambiguous breaker that needs trip_unit/load_lug/phase to resolve

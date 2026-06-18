@@ -9,13 +9,12 @@ from __future__ import annotations
 
 import json
 import sys
-from dataclasses import asdict
 from pathlib import Path
 
 import click
 
 from .catalog import Catalog
-from .engine import Breaker, Spec, assemble_bom
+from .engine import Breaker, Spec, assemble_bom, result_to_jsonable, spec_from_dict
 from .errors import FACTORY_BANNER, SuperBoxError
 
 
@@ -37,39 +36,6 @@ def _load_spec_file(path: Path) -> dict:
     except json.JSONDecodeError:
         import yaml
         return yaml.safe_load(text)
-
-
-def _breaker_from_dict(d: dict) -> Breaker:
-    return Breaker(
-        frame=d["frame"],
-        poles=int(d["poles"]),
-        amps=int(d["amps"]),
-        int_rating=d.get("int_rating"),
-        qty=int(d.get("qty", 1)),
-        trip_unit=d.get("trip_unit"),
-        load_lug=d.get("load_lug"),
-        phase=d.get("phase"),
-        elec_accessory=bool(d.get("elec_accessory", False)),
-        rated_100pct=bool(d.get("rated_100pct", False)),
-        orientation=d.get("orientation", "horizontal"),
-        lug_pad_sets=int(d.get("lug_pad_sets", 1)),
-        accessories=d.get("accessories", []),
-    )
-
-
-def _spec_from_dict(d: dict) -> Spec:
-    main = _breaker_from_dict(d["main"]) if d.get("main") else None
-    branches = [_breaker_from_dict(b) for b in d.get("branches", [])]
-    return Spec(
-        panel_amps=int(d["panel_amps"]),
-        main_type=d["main_type"],
-        enclosure=d["enclosure"],
-        main=main,
-        branches=branches,
-        accessories=d.get("accessories", []),
-        voltage=d.get("voltage"),
-        system=d.get("system"),
-    )
 
 
 def _parse_branch_flag(s: str) -> Breaker:
@@ -127,13 +93,6 @@ def _render_human(result: dict) -> str:
     return "\n".join(out)
 
 
-def _result_to_jsonable(result: dict) -> dict:
-    out = dict(result)
-    if out.get("bom"):
-        out["bom"] = [asdict(l) for l in out["bom"]]
-    return out
-
-
 # --------------------------------------------------------------------------
 # command
 # --------------------------------------------------------------------------
@@ -162,7 +121,7 @@ def main(spec_path, panel_amps, main_type, enclosure, branch_flags, data_dir, as
     catalog = Catalog.load(data_dir)
 
     if spec_path:
-        spec = _spec_from_dict(_load_spec_file(spec_path))
+        spec = spec_from_dict(_load_spec_file(spec_path))
     else:
         if not (panel_amps and main_type and enclosure):
             raise click.UsageError("provide --spec, or all of --panel-amps/--main-type/--enclosure")
@@ -178,7 +137,7 @@ def main(spec_path, panel_amps, main_type, enclosure, branch_flags, data_dir, as
         raise click.ClickException(str(e))
 
     if as_json:
-        click.echo(json.dumps(_result_to_jsonable(result), indent=2))
+        click.echo(json.dumps(result_to_jsonable(result), indent=2))
     else:
         click.echo(_render_human(result))
 

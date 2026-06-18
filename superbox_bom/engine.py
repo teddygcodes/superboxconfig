@@ -7,7 +7,7 @@ each function's docstring names the rule it enforces.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from typing import Any, Optional
 
 from .catalog import Catalog
@@ -675,3 +675,50 @@ def assemble_bom(spec: Spec, catalog: Catalog) -> dict:
         "right": packed.get("right_assigned", []),
     }
     return {"status": "ok", "bom": bom, "validation": validation}
+
+
+# --------------------------------------------------------------------------
+# dict <-> dataclass helpers (shared by the CLI, the Flask app, and the
+# in-browser Pyodide build; kept here so they stay free of click/yaml)
+# --------------------------------------------------------------------------
+
+
+def breaker_from_dict(d: dict) -> Breaker:
+    return Breaker(
+        frame=d["frame"],
+        poles=int(d["poles"]),
+        amps=int(d["amps"]),
+        int_rating=d.get("int_rating"),
+        qty=int(d.get("qty", 1)),
+        trip_unit=d.get("trip_unit"),
+        load_lug=d.get("load_lug"),
+        phase=d.get("phase"),
+        elec_accessory=bool(d.get("elec_accessory", False)),
+        rated_100pct=bool(d.get("rated_100pct", False)),
+        orientation=d.get("orientation", "horizontal"),
+        lug_pad_sets=int(d.get("lug_pad_sets", 1)),
+        accessories=d.get("accessories", []),
+    )
+
+
+def spec_from_dict(d: dict) -> Spec:
+    main = breaker_from_dict(d["main"]) if d.get("main") else None
+    branches = [breaker_from_dict(b) for b in d.get("branches", [])]
+    return Spec(
+        panel_amps=int(d["panel_amps"]),
+        main_type=d["main_type"],
+        enclosure=d["enclosure"],
+        main=main,
+        branches=branches,
+        accessories=d.get("accessories", []),
+        voltage=d.get("voltage"),
+        system=d.get("system"),
+    )
+
+
+def result_to_jsonable(result: dict) -> dict:
+    """Convert a result (with BomLine dataclasses) to plain JSON-able dicts."""
+    out = dict(result)
+    if out.get("bom"):
+        out["bom"] = [asdict(line) for line in out["bom"]]
+    return out
