@@ -1,6 +1,8 @@
 :root {
-  --abb-red: #ff000f;
-  --abb-red-dark: #d2001a;
+  --brand: #1d3f8f;          /* HESCO navy accent (complements the flag) */
+  --brand-dark: #16306e;
+  --abb-red: #c0182a;        /* reserved for danger/refuse states */
+  --abb-red-dark: #9a1220;
   --ink: #1f1f1f;
   --slate: #36424a;
   --slate-dark: #2b343a;
@@ -34,13 +36,7 @@ header.topbar {
   z-index: 20;
 }
 .logo { display: flex; align-items: center; gap: 12px; }
-.logo .abb {
-  font-weight: 800;
-  font-size: 30px;
-  letter-spacing: 2px;
-  color: var(--abb-red);
-  font-family: Arial, sans-serif;
-}
+.logo .hesco-logo { height: 40px; width: auto; display: block; }
 .logo .sep { color: var(--line); font-size: 26px; font-weight: 200; }
 .logo .app { font-size: 20px; font-weight: 400; color: #222; }
 .logo .app b { font-weight: 700; }
@@ -77,7 +73,7 @@ nav.tabs button {
   cursor: pointer;
   border-bottom: 3px solid transparent;
 }
-nav.tabs button.active { color: #000; font-weight: 700; border-bottom-color: var(--abb-red); }
+nav.tabs button.active { color: #000; font-weight: 700; border-bottom-color: var(--brand); }
 nav.tabs button:hover { color: #000; }
 
 /* ---- layout ---- */
@@ -93,7 +89,7 @@ main { max-width: 1180px; margin: 22px auto; padding: 0 20px 60px; }
 .card::before {
   content: "";
   position: absolute; top: 0; left: 24px;
-  width: 34px; height: 3px; background: var(--abb-red);
+  width: 34px; height: 3px; background: var(--brand);
 }
 .card h2 { margin: 4px 0 18px; font-size: 16px; }
 .section-title {
